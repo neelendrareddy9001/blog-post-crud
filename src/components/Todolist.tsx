@@ -17,7 +17,25 @@ export const Todolist = () => {
         setEditingTodoId(null);
         setEditedTodoText("")
     }
+
+    const handlEditSave = (id: number) => {
+        if(editedTodoText.trim() !== '') {
+            const updateTodo = TodoService.updateTodo({
+                id,
+                text: editedTodoText,
+                completed: false
+            });
+            setTodos((prevTodos) => prevTodos.map((todo) => (todo.id === id ? updateTodo : todo)))
+        } 
+    }
+
+
   return (
-    <div>Todolist</div>
+    <div className='todoContainer'>
+        {/* Todo Input Form Component Goes Here */}
+        {todos.map((todo) => {
+            <div className='' key={todo.id}></div>
+        })}
+    </div>
   )
 }
